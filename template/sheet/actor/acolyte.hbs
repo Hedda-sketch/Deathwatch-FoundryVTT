@@ -1,0 +1,172 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <div class="acolyte">
+        <div class="header border">
+    <div class="flex column">
+           <form class="{{cssClass}}" autocomplete="off">
+    <div class="acolyte"> {{!-- Später evtl. class="marine" --}}
+        <div class="header border">
+    <div class="flex row header-main-area">
+        {{!-- Linke Seite: Charakterbild --}}
+        <div class="avatar">
+            <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+        </div>
+
+<div class="flex column grow info-grid">
+    {{!-- Reihe 1: Identität --}}
+    <div class="header-grid-row">
+        <div class="grid-item">
+            <label>{{localize "First Name"}}</label>
+            <input name="name" type="text" value="{{actor.name}}" placeholder="Vorname" />
+        </div>
+        <div class="grid-item">
+            <label>{{localize "Last Name"}}</label>
+            <input name="system.bio.lastName" type="text" value="{{system.bio.lastName}}" placeholder="Nachname" />
+        </div>
+    </div>
+
+    {{!-- Reihe 2: Herkunft & Rolle --}}
+    <div class="header-grid-row">
+        <div class="grid-item">
+            <label>{{localize "Chapter"}}</label>
+            <input name="system.bio.homeWorld" type="text" value="{{system.bio.homeWorld}}" />
+        </div>
+        <div class="grid-item">
+            <label>{{localize "Specialty"}}</label>
+            <input name="system.bio.role" type="text" value="{{system.bio.role}}" />
+        </div>
+    </div>
+
+    {{!-- Reihe 3: Spezialisierung & Wesen --}}
+    <div class="header-grid-row">
+        <div class="grid-item">
+            <label>{{localize "Adv. Specialty"}}</label>
+            <input name="system.bio.advSpecialty" type="text" value="{{system.bio.advSpecialty}}" />
+        </div>
+        <div class="grid-item">
+            <label>{{localize "Demeanour"}}</label>
+            <input name="system.bio.demeanour" type="text" value="{{system.bio.demeanour}}" />
+        </div>
+    </div>
+
+    {{!-- Reihe 4: Ordenstugend & Ausrüstungshistorie --}}
+    <div class="header-grid-row">
+        <div class="grid-item">
+            <label>{{localize "Chapter Demeanour"}}</label>
+            <input name="system.bio.chapterDemeanour" type="text" value="{{system.bio.chapterDemeanour}}" />
+        </div>
+        <div class="grid-item">
+            <label>{{localize "Power Armor History"}}</label>
+            <input name="system.bio.paHistory" type="text" value="{{system.bio.paHistory}}" />
+        </div>
+    </div>
+
+    {{!-- Reihe 5: Taten & Rang --}}
+    <div class="header-grid-row">
+        <div class="grid-item">
+            <label>{{localize "Deed"}}</label>
+            <input name="system.bio.deed" type="text" value="{{system.bio.deed}}" />
+        </div>
+        <div class="grid-item">
+            <label>{{localize "Rank"}}</label>
+            <input name="system.bio.rank" type="text" value="{{system.bio.rank}}" />
+        </div>
+    </div>
+</div>
+    </div>
+
+    {{!-- Zeile 5: Description (Vollbreite) --}}
+    <div class="flex column header-secondary-area">
+        
+        {{!-- Zeile 6: Status-Leiste (Fate, Fatigue, Initiative) --}}
+        <div class="header-grid-row status-row">
+            <div class="status-controls flex row">
+                <div class="fate-box">
+                    <label>{{localize "FATE"}}</label>
+                    <input name="system.fate.value" type="number" value="{{system.fate.value}}" /> / 
+                    <input name="system.fate.max" type="number" value="{{system.fate.max}}" />
+                </div>
+                <div class="fatigue-box">
+                    <label>{{localize "FATIGUE"}}</label>
+                    <input name="system.fatigue.value" type="number" value="{{system.fatigue.value}}" /> / 
+                    <input name="system.fatigue.max" type="number" value="{{system.fatigue.max}}" />
+                </div>
+                <div class="init-box">
+                    <button class="roll-initiative button" type="button" data-roll="init">
+                        <i class="fas fa-dice-d20"></i> {{localize "INITIATIVE"}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+        {{!-- Zeile 6: Die Characteristics-Leiste (WS, BS, S, T, Ag, Int, Per, WP, Fel) --}}
+      <div class="characteristics-header flex row">
+    {{#each system.characteristics as |characteristic key|}}
+        {{#unless (eq key "influence")}}
+        <div class="char-box flex column" data-characteristic="{{key}}">
+            
+            {{!-- Ausgeschriebener Name als Button (aktiviert die Würfel-Logik) --}}
+            <div class="char-label">
+                <button class="roll-characteristic" data-characteristic="{{key}}" type="button">
+                    {{localize characteristic.label}}
+                </button>
+            </div>
+
+            <div class="flex row char-layout-container">
+                {{!-- Kleine Kästen übereinander --}}
+                <div class="char-sub-boxes flex column">
+                    <div class="char-bonus-box" title="{{localize 'BONUS'}}">
+                        {{characteristic.bonus}}
+                    </div>
+                    <div class="char-advance-box" title="{{localize 'ADVANCES'}}">
+                        {{characteristic.advance}}
+                    </div>
+                </div>
+
+                {{!-- Hauptwert (Read-Only) --}}
+                <div class="char-value-box">
+                    <input type="number" value="{{characteristic.total}}" disabled />
+                </div>
+            </div>
+        </div>
+        {{/unless}}
+    {{/each}}
+</div>
+</div>
+    </div>
+</div>
+
+        <div class="sheet-tabs tabs flex row" data-group="primary">
+            <b class="item" data-tab="stats">{{localize "TAB.STATS"}}</b>
+            <b class="item" data-tab="combat">{{localize "TAB.COMBAT"}}</b>
+            <b class="item" data-tab="abilities">{{localize "TAB.ABILITIES"}}</b>
+            <b class="item" data-tab="psychic-powers">{{localize "TAB.PSYCHIC_POWERS"}}</b>
+            <b class="item" data-tab="gear">{{localize "TAB.GEAR"}}</b>
+            <b class="item" data-tab="progression">{{localize "TAB.ADVANCES"}}</b>
+            <b class="item" data-tab="notes">{{localize "TAB.NOTES"}}</b>
+        </div>
+
+        <div class="sheet-body">
+            <div class="tab" data-group="primary" data-tab="stats">
+                {{> systems/dark-heresy/template/sheet/actor/tab/stats.hbs}}
+            </div>
+            <div class="tab" data-group="primary" data-tab="combat">
+                {{> systems/dark-heresy/template/sheet/actor/tab/combat.hbs}}
+            </div>
+            <div class="tab" data-group="primary" data-tab="abilities">
+                {{> systems/dark-heresy/template/sheet/actor/tab/abilities.hbs}}
+            </div>
+            <div class="tab" data-group="primary" data-tab="psychic-powers">
+                {{> systems/dark-heresy/template/sheet/actor/tab/psychic-powers.hbs}}
+            </div>
+            <div class="tab" data-group="primary" data-tab="gear">
+                {{> systems/dark-heresy/template/sheet/actor/tab/gear.hbs}}
+            </div>
+            <div class="tab" data-group="primary" data-tab="progression">
+                {{> systems/dark-heresy/template/sheet/actor/tab/progression.hbs}}
+            </div>
+            <div class="tab" data-group="primary" data-tab="notes">
+                {{> systems/dark-heresy/template/sheet/actor/tab/notes.hbs}}
+            </div>
+        </div>
+    </div>
+</form>
