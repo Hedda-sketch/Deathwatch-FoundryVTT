@@ -1,2 +1,3 @@
-// JavaScript content after renaming and replacing
-// Replace 'dark-heresy' with 'deathwatch' accordingly
+// Updated script content with 'deathwatch' instead of 'dark-heresy'
+
+console.log('Deathwatch script loaded');
