@@ -1,0 +1,38 @@
+{
+	"id": "deathwatch",
+	"title": "Warhammer 40k: Deathwatch",
+	"description": "Unofficial Foundry VTT System for Warhammer 40k: Deathwatch",
+	"version": "0.0.0.1",
+	"minumumCoreVersion": 11,
+	"compatibility": {
+		"minimum": 11,
+		"verified": 12, 
+		"maximum": 13
+	},
+	"templateVersion": 2,
+	"authors": [
+	  { "name":  "Hedda",
+        "email": "michafranz91@gmail.com",
+        "discord":  "buechsediedose",
+        "root":  "heddagedda"},
+      { "name":  "Blake"}
+	],
+    "scripts": [],
+    "esmodules": [],
+    "styles": [],
+    "packs": [],
+    "languages": [
+      {
+        "lang": "en",
+        "name": "English",
+        "path": "lang/en.json"
+      }
+    ],
+	"gridDistance": 1,
+    "gridUnits": "m",
+    "primaryTokenAttribute": null,
+    "secondaryTokenAttribute": null,
+    "url": "https://github.com/Hedda-sketch/Deathwatch-FoundryVTT/",
+    "socket": true,
+    "license": "LICENSE.txt"
+}
